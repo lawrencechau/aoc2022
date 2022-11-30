@@ -3,22 +3,28 @@ advent of code 2022
 
 https://adventofcode.com/2022
 
-### stream / youtube
+## How to use
 
-- [Streamed daily on twitch](https://twitch.tv/anthonywritescode)
-- [Streams uploaded to youtube afterwards](https://www.youtube.com/@anthonywritescode-vods)
+```sh
+> virtualenv venv
+> source venv/bin/activator
 
-### about
+> cp -r day00 dayXX
+> cd dayXX
 
-for 2022, I'm planning to implement in python
+# Download the input.txt
+> aoc-download-input
 
-### timing
+# Start working in file
+> vim input01.py
+# Insert example in INPUT_S and set EXPECTED
 
-- comparing to these numbers isn't necessarily useful
-- normalize your timing to day 1 part 1 and compare
-- alternate implementations are listed in parens
-- these timings are very non-scientific (sample size 1)
+# Run test
+> pytest part1.py
 
-```console
-$ find -maxdepth 1 -type d -name 'day*' -not -name day00 | sort | xargs --replace bash -xc 'python {}/part1.py {}/input.txt; python {}/part2.py {}/input.txt'
+# Submit
+> python3 part1.py input.txt | aoc-submit --part 1
+
+# Prep for part2 and do the same thing
+> cp part1.py part2.py
 ```
