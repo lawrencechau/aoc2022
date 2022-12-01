@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import heapq
 import argparse
 import os.path
 
 import pytest
+import sys
 
 import support
 
@@ -18,16 +20,20 @@ def compute(s: str) -> int:
     lines = s.splitlines()
     ans = 0
     tmp = 0
+    h = []
     for line in lines:
         try:
             tmp += int(line)
         except Exception:
-            ans = max(ans, tmp)
+            heapq.heappush(h, tmp)
             tmp = 0
         print(line)
         pass
-    ans = max(ans, tmp)
-    print(ans)
+    heapq.heappush(h, tmp)
+    print(h)
+    thre = heapq.nlargest(3, h)
+    print(thre)
+    ans = sum(thre)
     return ans
 
 
@@ -47,7 +53,7 @@ INPUT_S = '''\
 
 10000
 '''
-EXPECTED = 24000
+EXPECTED = 55000
 
 
 @pytest.mark.parametrize(
