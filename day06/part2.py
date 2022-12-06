@@ -1,10 +1,10 @@
 from __future__ import annotations
-from collections import deque, Counter, defaultdict
 
 import argparse
 import os.path
 
 import pytest
+from collections import Counter
 
 import support
 
@@ -12,27 +12,28 @@ INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 
 def compute(s: str) -> int:
-    numbers = support.parse_numbers_split(s)
-    for n in numbers:
-        pass
-
     lines = s.splitlines()
-    for line in lines:
+    line = lines[0]
+    for i in range(14, len(line)):
+        a = line[i-14:i]
+        if len(Counter(a)) == 14:
+            return i
         pass
     # TODO: implement solution here!
-    return 0
+    return -1
 
 
 INPUT_S = '''\
-
+nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg
 '''
-EXPECTED = 1
+EXPECTED = 29
 
 
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
         (INPUT_S, EXPECTED),
+        ('zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw', 26),
     ),
 )
 def test(input_s: str, expected: int) -> None:
